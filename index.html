@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- meta -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>文章確認ツール</title>
     <!-- reset -->
-    <link　rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
+    <link　rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
     <!-- bootstrap -->
     <link rel="stylesheet" href="./bootstrap-grid.min.css" />
     <link rel="stylesheet" href="./bootstrap.min.css" />
@@ -21,140 +21,178 @@
     <!-- custom -->
     <link rel="stylesheet" href="./custom.css" />
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=M+PLUS+1p"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet" />
     <title>文章確認ツール</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <!-- nav -->
     <div class="container-fluid navigation">
-      <div class="row">
-        <div class="col-12">
-          <h1 class="text-center">文章確認ツール.js</h1>
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">文章確認ツール.js</h1>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- 元テキスト入力部分 -->
     <div class="container original-text">
-      <div class="row">
-        <div class="col-12 heading">
-          <h2 class="text-center">ステップ①：下記に元のテキストを入力してください</h2>
+        <div class="row">
+            <div class="col-12 heading">
+                <h2 class="text-center">ステップ①：下記に元のテキストを入力してください</h2>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12 inputarea">
-          <textarea name="" id="" cols="30" rows="3">
-      ここに元の文章を入れる</textarea
-          >
+        <div class="row">
+            <div class="col-12 inputarea">
+                <textarea name="" id="inputArea" cols="30" rows="3">ここに元の文章を入れる</textarea>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- ボタン部分 -->
     <div class="container button">
-      <div class="row">
-        <div class="col-12 button-individual">
-          <p class="text-center">スタート(1文目を表示)</p>
+        <div class="row">
+            <div class="col-12 button-individual" onclick='editCheck("編集を開始しますか？");'>
+                <p class="text-center">スタート(1文目を表示)</p>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- テキスト表示 -->
     <div class="container display">
-      <div class="row">
-        <div class="col-12">
-          <!-- ここにテキストボックスの文章を表示する -->
-          <textarea name="" id="" cols="30" rows="5">ここに文章を表示</textarea>
+        <div class="row">
+            <div class="col-12">
+                <!-- ここにテキストボックスの文章を表示する -->
+                <textarea name="" id="showTextArea" cols="30" rows="5">ここに文章を表示</textarea>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- ボタン部分 -->
     <div class="container button">
-      <div class="row">
-        <div class="col-6 button-individual">
-          <p class="text-center">戻る</p>
+        <div class="row">
+            <div class="col-6 button-individual">
+                <p class="text-center">(←)戻る</p>
+            </div>
+            <div class="col-6 button-individual">
+                <p class="text-center">次へ(→)</p>
+            </div>
+            <div class="col-12 button-individual" onclick='syuturyokuCheck("入力を完了しますか？");'>
+                <p class="text-center">作成完了(出力)</p>
+            </div>
         </div>
-        <div class="col-6 button-individual">
-          <p class="text-center">次へ</p>
-        </div>
-        <div class="col-12 button-individual">
-          <p class="text-center">作成完了(出力)</p>
-        </div>
-      </div>
     </div>
 
     <!-- 完成テキスト部分 -->
     <div class="container original-text">
-      <div class="row">
-        <div class="col-12 heading">
-          <h2 class="text-center">ステップ②：下記に完成されたテキストが表示されます。</h2>
+        <div class="row">
+            <div class="col-12 heading">
+                <h2 class="text-center">ステップ②：下記に完成されたテキストが表示されます。</h2>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12 inputarea">
-          <textarea name="" id="" cols="30" rows="5">
-      ここに完成されたテキストを表示</textarea
-          >
+        <div class="row">
+            <div class="col-12 inputarea">
+                <textarea name="" id="" cols="30" rows="5">ここに完成されたテキストを表示</textarea>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- ボタン部分 -->
     <div class="container button">
-      <div class="row">
-        <div class="col-12 button-individual">
-          <p class="text-center">クリップボードにコピー</p>
+        <div class="row">
+            <div class="col-12 button-individual">
+                <p class="text-center">クリップボードにコピー</p>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- 仕様説明 -->
     <div class="container mt-3">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="text-center">このツールの目的</h2>
-          <ul>
-            <li>きれいな文章に構成するために1文ずつしっかりと確認するため。</li>
-            <li></li>
-            <li></li>
-          </ul>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">このツールの目的</h2>
+                <ul>
+                    <li>きれいな文章に構成するために1文ずつしっかりと確認するため。</li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- 仕様説明 -->
     <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="text-center">仕様</h2>
-          <ul>
-            <li>元のテキストを入力したら、まずタグを除去する。</li>
-            <li>
-              改行と句点(「。」)の部分で文章を分割し、配列に1つづつ格納する。
-            </li>
-            <li>配列の中身のテキストを1つずつ表示部分に表示させる。</li>
-            <li>「戻る」「次へ」ボタンで表示させる文章を前後に変更する。</li>
-            <li>キーボードでも戻ると進むが変えられたら良いね</li>
-            <li>上下のtextareaは連動する</li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">仕様</h2>
+                <ul>
+                    <li>元のテキストを入力したら、まずタグを除去する。</li>
+                    <li>
+                        改行と句点(「。」)の部分で文章を分割し、配列に1つづつ格納する。
+                    </li>
+                    <li>配列の中身のテキストを1つずつ表示部分に表示させる。</li>
+                    <li>「戻る」「次へ」ボタンで表示させる文章を前後に変更する。</li>
+                    <li>キーボードでも戻ると進むが変えられたら良いね</li>
+                    <li>上下のtextareaは連動する</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
 
     <script>
-      // HTMLタグを除去するやつ
-      // 開業と句点部分で分割して配列にするやつ
-      // input内のテキストを読み取るやつ
-      // 表示部分に写すやつ
+        // HTMLタグを除去するやつ
+        // 開業と句点部分で分割して配列にするやつ
+        // input内のテキストを読み取るやつ
+        // 表示部分に写すやつ
+
+        // main処理
+        function main() {
+            // OKの処理を記載
+            var inputText = getInputArea();
+            var removedTagText = removeHtmlTag(inputText);
+            // 文字を分割する
+            var splitedText = removedTagText.split(/(?<=。)/g);
+            console.log(splitedText[0]);
+            showArrayText(splitedText)
+        }
+
+        //配列をテキストエリアに表示
+        function showArrayText(splitedText) {
+            document.getElementById("showTextArea").value = splitedText[0];
+        }
+
+        // 編集確認
+        function editCheck(text) {
+            if (confirm(text)) {
+                main();
+            }
+        }
+
+        // 作成完了確認
+        function syuturyokuCheck(text) {
+            if (confirm(text)) {
+                // OKの処理を記載
+            }
+        }
+
+        // 入力のテキストを取得
+        function getInputArea() {
+            const getText = document.getElementById("inputArea").value;
+            return getText;
+        }
+
+        // タグ、空白削除
+        function removeHtmlTag(text) {
+            var removedText = text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
+            removedText = removedText.replace(/\s+/g, "");
+            return removedText;
+        }
     </script>
-  </body>
+</body>
+
 </html>
