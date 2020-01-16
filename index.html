@@ -63,7 +63,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- ここにテキストボックスの文章を表示する -->
-                <textarea name="" id="showTextArea" cols="30" rows="5" onInput="editText()">ここに文章を表示</textarea>
+                <textarea name="" id="showTextArea" cols="30" rows="5" onInput="editText(splitedText)">ここに文章を表示</textarea>
             </div>
         </div>
     </div>
@@ -174,8 +174,9 @@
         }
 
         // 文字の編集を行う
-        function editText() {
-            var editedText = document.getElementById("showTextArea").value;
+        function editText(splitedText) {
+            splitedText[currentArrayNumber] = document.getElementById("showTextArea").value;
+            document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
         }
 
         // 次へを押したときの処理
