@@ -103,7 +103,7 @@
       <div class="row">
         <div class="col-12">
           <!-- ここにテキストボックスの文章を表示する -->
-          <textarea name="" id="showNextTextArea" cols="30" rows="5"  disabled>
+          <textarea name="" id="showNextTextArea" cols="30" rows="5" disabled>
 次の文</textarea
           >
         </div>
@@ -288,10 +288,11 @@
       function showArrayText(splitedText) {
         // 表示中の配列番号を取得(初期値0)
         currentArrayNumber = 0;
+        document.getElementById("showPrevTextArea").value = "";
         document.getElementById("showTextArea").value =
           splitedText[currentArrayNumber];
-          document.getElementById("showNextTextArea").value =
-          splitedText[currentArrayNumber+1];
+        document.getElementById("showNextTextArea").value =
+          splitedText[currentArrayNumber + 1];
         // 配列の要素数を取得
         maxArrayCount = splitedText.length;
         endEdit();
