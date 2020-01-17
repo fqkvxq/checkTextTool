@@ -49,9 +49,19 @@ html {
   border-radius: 5px;
 }
 
+#showPrevTextArea {
+    width: 100%;
+    font-size: 20px;
+}
+
 .display textarea {
   width: 100%;
   font-size: 50px;
+}
+
+#showNextTextArea {
+    width: 100%;
+    font-size: 20px;
 }
 
 .showtext {

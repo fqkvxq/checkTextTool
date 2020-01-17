@@ -68,6 +68,18 @@
       </div>
     </div>
 
+    <!-- 前のテキストを表示 -->
+    <div class="container display">
+      <div class="row">
+        <div class="col-12">
+          <!-- ここにテキストボックスの文章を表示する -->
+          <textarea name="" id="showPrevTextArea" cols="30" rows="5" disabled>
+前の文</textarea
+          >
+        </div>
+      </div>
+    </div>
+
     <!-- テキスト表示 -->
     <div class="container display">
       <div class="row">
@@ -81,6 +93,18 @@
             onInput="editText(splitedText)"
           >
 ここに文章を表示</textarea
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- 次のテキストを表示 -->
+    <div class="container display">
+      <div class="row">
+        <div class="col-12">
+          <!-- ここにテキストボックスの文章を表示する -->
+          <textarea name="" id="showNextTextArea" cols="30" rows="5"  disabled>
+次の文</textarea
           >
         </div>
       </div>
@@ -266,6 +290,8 @@
         currentArrayNumber = 0;
         document.getElementById("showTextArea").value =
           splitedText[currentArrayNumber];
+          document.getElementById("showNextTextArea").value =
+          splitedText[currentArrayNumber+1];
         // 配列の要素数を取得
         maxArrayCount = splitedText.length;
         endEdit();
@@ -284,13 +310,15 @@
       // 次へを押したときの処理
       function goNextSentence(splitedText) {
         console.log(splitedText);
-        if (currentArrayNumber < maxArrayCount-1) {
+        if (currentArrayNumber < maxArrayCount - 1) {
           currentArrayNumber += 1;
+          // 進捗率を計算
+          document.getElementById("showPrevTextArea").value =
+            splitedText[currentArrayNumber - 1];
           document.getElementById("showTextArea").value =
             splitedText[currentArrayNumber];
-          // 進捗率を計算
-            document.getElementById("showTextArea").value =
-            splitedText[currentArrayNumber];
+          document.getElementById("showNextTextArea").value =
+            splitedText[currentArrayNumber + 1];
           console.log("currentArrayNumber=" + currentArrayNumber);
           console.log("maxArrayCount=" + maxArrayCount);
           currentPercent = currentArrayNumber / maxArrayCount;
@@ -304,8 +332,12 @@
         console.log(splitedText);
         if (currentArrayNumber > 0) {
           currentArrayNumber -= 1;
+          document.getElementById("showPrevTextArea").value =
+            splitedText[currentArrayNumber - 1];
           document.getElementById("showTextArea").value =
             splitedText[currentArrayNumber];
+          document.getElementById("showNextTextArea").value =
+            splitedText[currentArrayNumber + 1];
           // 進捗率を計算
           currentPercent = currentArrayNumber / maxArrayCount;
           bar.animate(currentPercent);
