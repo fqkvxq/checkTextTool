@@ -77,9 +77,6 @@
             <div class="col-6 button-individual" onclick='goNextSentence(splitedText)'>
                 <p class="text-center">次へ(→)</p>
             </div>
-            <div class="col-12 button-individual" onclick='syuturyokuCheck("入力を完了しますか？");'>
-                <p class="text-center">作成完了(出力)</p>
-            </div>
         </div>
     </div>
 
@@ -92,7 +89,7 @@
         </div>
         <div class="row">
             <div class="col-12 inputarea">
-                <textarea name="" id="" cols="30" rows="5"></textarea>
+                <textarea name="" id="editedTextArea" cols="30" rows="10"></textarea>
             </div>
         </div>
     </div>
@@ -145,16 +142,12 @@
     </div>
 
     <script>
-        // HTMLタグを除去するやつ
-        // 開業と句点部分で分割して配列にするやつ
-        // input内のテキストを読み取るやつ
-        // 表示部分に写すやつ
-        var currentArrayNumber = "";
-        var splitedText = "";
-        var maxArrayCount = "";
+        var currentArrayNumber = ""; // 現在選択している配列番号
+        var splitedText = ""; // 配列
+        var maxArrayCount = ""; // 配列数
 
-        // main処理
-        function main() {
+        // 編集
+        function startEdit() {
             // OKの処理を記載
             var inputText = getInputArea();
             var removedTagText = removeHtmlTag(inputText);
@@ -164,6 +157,15 @@
             showArrayText(splitedText)
         }
 
+        // 編集終了時の処理
+        function endEdit(){
+          // 配列の中身を結合する
+          var editedText = splitedText.join("");
+          console.log(editedText);
+          // テキストエリアに表示する
+          document.getElementById("editedTextArea").value = editedText;
+        }
+
         //配列をテキストエリアに表示(ボタンを押したとき)
         function showArrayText(splitedText) {
             // 表示中の配列番号を取得(初期値0)
@@ -171,18 +173,19 @@
             document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
             // 配列の要素数を取得
             maxArrayCount = splitedText.length;
+            endEdit();
         }
 
         // 文字の編集を行う
         function editText(splitedText) {
             splitedText[currentArrayNumber] = document.getElementById("showTextArea").value;
             document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
+            endEdit();
         }
 
         // 次へを押したときの処理
         function goNextSentence(splitedText) {
             console.log(splitedText);
-
             if (currentArrayNumber < maxArrayCount - 1) {
                 currentArrayNumber += 1;
                 document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
@@ -201,14 +204,14 @@
         // 編集確認
         function editCheck(text) {
             if (confirm(text)) {
-                main();
+                startEdit();
             }
         }
 
         // 作成完了確認
         function syuturyokuCheck(text) {
             if (confirm(text)) {
-                // OKの処理を記載
+                endEdit();
             }
         }
 
