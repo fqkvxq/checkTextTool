@@ -25,7 +25,7 @@
     <title>文章確認ツール</title>
 </head>
 
-<body>
+<body onkeydown='keydownLR()'>
     <!-- nav -->
     <div class="container-fluid navigation">
         <div class="row">
@@ -179,10 +179,23 @@
             document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
         }
 
-        // 次へを押したときの処理
-        function goNextSentence(splitedText) {
-            console.log(splitedText);
+        // キーボード押下処理(左右移動)
+        function keydownLR() {
+            var hoge = event.keyCode;
+            if (document.activeElement.id != "showTextArea") {
+                // textareaにフォーカスがあたっていないときだけ
+                if (hoge == 37) {
+                    goPrevSentence();
+                }
+                if (hoge == 39) {
+                    goNextSentence();
+                }
+            }
+        }
 
+        // 次へを押したときの処理
+        function goNextSentence() {
+            console.log(splitedText);
             if (currentArrayNumber < maxArrayCount - 1) {
                 currentArrayNumber += 1;
                 document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
