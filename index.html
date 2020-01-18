@@ -22,222 +22,383 @@
     <link rel="stylesheet" href="./custom.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet" />
+    <!-- progressbar -->
+    <script src="https://rawcdn.githack.com/kimmobrunfeldt/progressbar.js/e0e1a8a67f83934d131dedca270fcc3b0e55d0c6/dist/progressbar.js"></script>
     <title>文章確認ツール</title>
 </head>
 
-<body onkeydown='keydownLR()'>
-    <!-- nav -->
-    <div class="container-fluid navigation">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="text-center">文章確認ツール.js</h1>
-            </div>
-        </div>
-    </div>
+<<<<<<< HEAD <body onkeydown='keydownLR()'>
+    =======
 
-    <!-- 元テキスト入力部分 -->
-    <div class="container original-text">
-        <div class="row">
-            <div class="col-12 heading">
-                <h2 class="text-center">ステップ①：下記に元のテキストを入力してください</h2>
+    <body>
+        >>>>>>> 53888027a7472ff28cfe00cdc4e69b14f43de51a
+        <!-- nav -->
+        <div class="container-fluid navigation">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-center">文章確認ツール.js</h1>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 inputarea">
-                <textarea name="" id="inputArea" cols="30" rows="3"></textarea>
-            </div>
-        </div>
-    </div>
 
-    <!-- ボタン部分 -->
-    <div class="container button">
-        <div class="row">
-            <div class="col-12 button-individual" onclick='editCheck("編集を開始しますか？");'>
-                <p class="text-center">スタート(1文目を表示)</p>
+        <!-- 元テキスト入力部分 -->
+        <div class="container original-text">
+            <div class="row">
+                <div class="col-12 heading">
+                    <h2 class="text-center">
+                        ステップ①：下記に元のテキストを入力してください
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 inputarea">
+                    <textarea name="" id="inputArea" cols="30" rows="1"></textarea>
+                </div>
             </div>
         </div>
+
+        <!-- ボタン部分 -->
+        <div class="container button">
+            <div class="row">
+                <div class="col-12 button-individual" onclick='editCheck("編集を開始しますか？");'>
+                    <p class="text-center">スタート(1文目を表示)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 前のテキストを表示 -->
+        <div class="container display">
+            <div class="row">
+                <div class="col-12">
+                    <!-- ここにテキストボックスの文章を表示する -->
+                    <textarea name="" id="showPrevTextArea" cols="30" rows="5" disabled>
+前の文</textarea
+          >
+        </div>
+      </div>
     </div>
 
     <!-- テキスト表示 -->
     <div class="container display">
-        <div class="row">
-            <div class="col-12">
-                <!-- ここにテキストボックスの文章を表示する -->
-                <textarea name="" id="showTextArea" cols="30" rows="7" onInput="editText(splitedText)">ここに文章を表示</textarea>
-            </div>
+      <div class="row">
+        <div class="col-12">
+          <!-- ここにテキストボックスの文章を表示する -->
+          <textarea
+            name=""
+            id="showTextArea"
+            cols="30"
+            rows="7"
+            onInput="editText(splitedText)"
+          >
+ここに文章を表示</textarea
+          >
         </div>
+      </div>
+    </div>
+
+    <!-- 次のテキストを表示 -->
+    <div class="container display">
+      <div class="row">
+        <div class="col-12">
+          <!-- ここにテキストボックスの文章を表示する -->
+          <textarea name="" id="showNextTextArea" cols="30" rows="5" disabled>
+次の文</textarea
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- progress bar -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12 px-0 my-1">
+          <div id="showProgressBar"></div>
+        </div>
+      </div>
     </div>
 
     <!-- ボタン部分 -->
     <div class="container button">
-        <div class="row">
-            <div class="col-6 button-individual" onclick='goPrevSentence(splitedText)'>
-                <p class="text-center">(←)戻る</p>
-            </div>
-            <div class="col-6 button-individual" onclick='goNextSentence(splitedText)'>
-                <p class="text-center">次へ(→)</p>
-            </div>
-            <div class="col-12 button-individual" onclick='syuturyokuCheck("入力を完了しますか？");'>
-                <p class="text-center">作成完了(出力)</p>
-            </div>
+      <div class="row">
+        <div
+          class="col-6 button-individual"
+          onclick="goPrevSentence(splitedText)"
+        >
+          <p class="text-center">(←)戻る</p>
         </div>
+        <div
+          class="col-6 button-individual"
+          onclick="goNextSentence(splitedText)"
+        >
+          <p class="text-center">次へ(→)</p>
+        </div>
+      </div>
     </div>
 
     <!-- 完成テキスト部分 -->
     <div class="container original-text">
-        <div class="row">
-            <div class="col-12 heading">
-                <h2 class="text-center">ステップ②：下記に完成されたテキストが表示されます。</h2>
+      <div class="row">
+        <div class="col-12 heading">
+          <h2 class="text-center">
+            ステップ②：下記に完成されたテキストが表示されます。
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 inputarea">
+          <textarea
+            name=""
+            id="editedTextArea"
+            cols="30"
+            rows="20"
+            disabled
+          ></textarea>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 inputarea">
-                <textarea name="" id="" cols="30" rows="5"></textarea>
+
+        <!-- ボタン部分 -->
+        <div class="container button">
+            <div class="row">
+                <div class="col-12 button-individual">
+                    <p class="text-center">クリップボードにコピー(まだ未実装)</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- ボタン部分 -->
-    <div class="container button">
-        <div class="row">
-            <div class="col-12 button-individual">
-                <p class="text-center">クリップボードにコピー</p>
+        <!-- 仕様説明 -->
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center">このツールの目的</h2>
+                    <ul>
+                        <li>
+                            きれいな文章に構成するために1文ずつしっかりと確認するため。
+                        </li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- 仕様説明 -->
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="text-center">このツールの目的</h2>
-                <ul>
-                    <li>きれいな文章に構成するために1文ずつしっかりと確認するため。</li>
-                    <li></li>
-                    <li></li>
-                </ul>
+        <!-- 仕様説明 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center">仕様</h2>
+                    <ul>
+                        <li>元のテキストを入力したら、まずタグを除去する。</li>
+                        <li>
+                            改行と句点(「。」)の部分で文章を分割し、配列に1つづつ格納する。
+                        </li>
+                        <li>配列の中身のテキストを1つずつ表示部分に表示させる。</li>
+                        <li>「戻る」「次へ」ボタンで表示させる文章を前後に変更する。</li>
+                        <li>キーボードでも戻ると進むが変えられたら良いね</li>
+                        <li>上下のtextareaは連動する</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+        <script>
+            window.addEventListener(
+                "beforeunload",
+                function(e) {
+                    e.returnValue = "ちょっと待ってくださいよ。まだダメですよ。";
+                },
+                false
+            );
+            var currentArrayNumber = 0; // 現在選択している配列番号(初期は0)
+            var splitedText = ""; // 配列
+            var maxArrayCount = 1; // 配列数(初期は1)
+            var currentPercent = 0;
+            var bar = "";
+            progressBar(currentPercent);
 
-    <!-- 仕様説明 -->
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="text-center">仕様</h2>
-                <ul>
-                    <li>元のテキストを入力したら、まずタグを除去する。</li>
-                    <li>
-                        改行と句点(「。」)の部分で文章を分割し、配列に1つづつ格納する。
-                    </li>
-                    <li>配列の中身のテキストを1つずつ表示部分に表示させる。</li>
-                    <li>「戻る」「次へ」ボタンで表示させる文章を前後に変更する。</li>
-                    <li>キーボードでも戻ると進むが変えられたら良いね</li>
-                    <li>上下のtextareaは連動する</li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+            function progressBar(currentPercent) {
+                // progressbar.js@1.0.0 version is used
+                // Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
 
-    <script>
-        // HTMLタグを除去するやつ
-        // 開業と句点部分で分割して配列にするやつ
-        // input内のテキストを読み取るやつ
-        // 表示部分に写すやつ
-        var currentArrayNumber = "";
-        var splitedText = "";
-        var maxArrayCount = "";
+                bar = new ProgressBar.Line(showProgressBar, {
+                    strokeWidth: 4,
+                    easing: "easeInOut",
+                    duration: 1400,
+                    color: "#FFEA82",
+                    trailColor: "#eee",
+                    trailWidth: 1,
+                    svgStyle: {
+                        width: "100%",
+                        height: "100%"
+                    },
+                    text: {
+                        style: {
+                            // Text color.
+                            // Default: same as stroke color (options.color)
+                            color: "#999",
+                            position: "absolute",
+                            right: "0",
+                            top: "30px",
+                            padding: 0,
+                            margin: 0,
+                            transform: null
+                        },
+                        autoStyleContainer: false
+                    },
+                    from: {
+                        color: "#FFEA82"
+                    },
+                    to: {
+                        color: "#ED6A5A"
+                    },
+                    step: (state, bar) => {
+                        bar.setText(Math.round(bar.value() * 100) + " %");
+                    }
+                });
+                bar.animate(currentPercent); // Number from 0.0 to 1.0
+            }
 
-        // main処理
-        function main() {
-            // OKの処理を記載
-            var inputText = getInputArea();
-            var removedTagText = removeHtmlTag(inputText);
-            // 文字を分割する
-            splitedText = removedTagText.split(/(?<=。)/g);
-            console.log(splitedText[0]);
-            showArrayText(splitedText)
-        }
-
-        //配列をテキストエリアに表示(ボタンを押したとき)
-        function showArrayText(splitedText) {
-            // 表示中の配列番号を取得(初期値0)
-            currentArrayNumber = 0;
-            document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
-            // 配列の要素数を取得
-            maxArrayCount = splitedText.length;
-        }
-
-        // 文字の編集を行う
-        function editText(splitedText) {
-            splitedText[currentArrayNumber] = document.getElementById("showTextArea").value;
-            document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
-        }
-
-        // キーボード押下処理(左右移動)
-        function keydownLR() {
-            var hoge = event.keyCode;
-            if (document.activeElement.id != "showTextArea") {
-                // textareaにフォーカスがあたっていないときだけ
-                if (hoge == 37) {
-                    goPrevSentence();
+            // キーボード押下処理(左右移動)
+            function keydownLR() {
+                var hoge = event.keyCode;
+                if (document.activeElement.id != "showTextArea") {
+                    // textareaにフォーカスがあたっていないときだけ
+                    if (hoge == 37) {
+                        goPrevSentence();
+                    }
+                    if (hoge == 39) {
+                        goNextSentence();
+                    }
                 }
-                if (hoge == 39) {
-                    goNextSentence();
+            }
+
+            // 次へを押したときの処理
+            function goNextSentence() {
+                console.log(splitedText);
+                if (currentArrayNumber < maxArrayCount - 1) {
+                    currentArrayNumber += 1;
+                    document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
                 }
             }
-        }
-
-        // 次へを押したときの処理
-        function goNextSentence() {
-            console.log(splitedText);
-            if (currentArrayNumber < maxArrayCount - 1) {
-                currentArrayNumber += 1;
-                document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
-            }
-        }
-
-        // 戻るを押したときの処理
-        function goPrevSentence() {
-            console.log(splitedText);
-            if (currentArrayNumber > 0) {
-                currentArrayNumber -= 1;
-                document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
-            }
-        }
-
-        // 編集確認
-        function editCheck(text) {
-            if (confirm(text)) {
-                main();
-            }
-        }
-
-        // 作成完了確認
-        function syuturyokuCheck(text) {
-            if (confirm(text)) {
+            // 編集
+            function startEdit() {
                 // OKの処理を記載
+                var inputText = getInputArea();
+                var removedTagText = removeHtmlTag(inputText);
+                // 文字を分割する
+                splitedText = removedTagText.split(/(?<=。)/g);
+                console.log(splitedText[0]);
+                showArrayText(splitedText);
+                // 進捗率を計算
+                currentPercent = currentArrayNumber / maxArrayCount;
+                bar.animate(currentPercent);
+                // 進捗率を計算
+                console.log("currentArrayNumber=" + currentArrayNumber);
+                console.log("maxArrayCount=" + maxArrayCount);
+                console.log("現時点の進捗=" + currentPercent);
             }
-        }
 
-        // 入力のテキストを取得
-        function getInputArea() {
-            const getText = document.getElementById("inputArea").value;
-            return getText;
-        }
+            // 編集終了時の処理
+            function endEdit() {
+                // 配列の中身を結合する
+                var editedText = splitedText.join("");
+                console.log(editedText);
+                // テキストエリアに表示する
+                document.getElementById("editedTextArea").value = editedText;
+            }
 
-        // タグ、空白削除
-        function removeHtmlTag(text) {
-            var removedText = text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
-            removedText = removedText.replace(/\s+/g, "");
-            return removedText;
-        }
-    </script>
-</body>
+            //配列をテキストエリアに表示(ボタンを押したとき)
+            function showArrayText(splitedText) {
+                // 表示中の配列番号を取得(初期値0)
+                currentArrayNumber = 0;
+                document.getElementById("showPrevTextArea").value = "";
+                document.getElementById("showTextArea").value =
+                    splitedText[currentArrayNumber];
+                document.getElementById("showNextTextArea").value =
+                    splitedText[currentArrayNumber + 1];
+                // 配列の要素数を取得
+                maxArrayCount = splitedText.length;
+                endEdit();
+            }
+
+            // 文字の編集を行う
+            function editText(splitedText) {
+                splitedText[currentArrayNumber] = document.getElementById(
+                    "showTextArea"
+                ).value;
+                document.getElementById("showTextArea").value =
+                    splitedText[currentArrayNumber];
+                endEdit();
+            }
+
+            // 次へを押したときの処理
+            function goNextSentence(splitedText) {
+                console.log(splitedText);
+                if (currentArrayNumber < maxArrayCount - 1) {
+                    currentArrayNumber += 1;
+                    // 進捗率を計算
+                    document.getElementById("showPrevTextArea").value =
+                        splitedText[currentArrayNumber - 1];
+                    document.getElementById("showTextArea").value =
+                        splitedText[currentArrayNumber];
+                    document.getElementById("showNextTextArea").value =
+                        splitedText[currentArrayNumber + 1];
+                    console.log("currentArrayNumber=" + currentArrayNumber);
+                    console.log("maxArrayCount=" + maxArrayCount);
+                    currentPercent = currentArrayNumber / maxArrayCount;
+                    bar.animate(currentPercent);
+                }
+                console.log("現時点の進捗=" + currentPercent);
+            }
+
+            // 戻るを押したときの処理
+            function goPrevSentence() {
+                console.log(splitedText);
+                if (currentArrayNumber > 0) {
+                    currentArrayNumber -= 1;
+                    document.getElementById("showPrevTextArea").value =
+                        splitedText[currentArrayNumber - 1];
+                    document.getElementById("showTextArea").value =
+                        splitedText[currentArrayNumber];
+                    document.getElementById("showNextTextArea").value =
+                        splitedText[currentArrayNumber + 1];
+                    // 進捗率を計算
+                    currentPercent = currentArrayNumber / maxArrayCount;
+                    bar.animate(currentPercent);
+                }
+            }
+
+            // 編集確認
+            function editCheck(text) {
+                if (confirm(text)) {
+                    startEdit();
+                }
+            }
+
+            // 作成完了確認
+            function syuturyokuCheck(text) {
+                if (confirm(text)) {
+                    endEdit();
+                }
+            }
+
+            // 入力のテキストを取得
+            function getInputArea() {
+                const getText = document.getElementById("inputArea").value;
+                return getText;
+            }
+
+            // タグ、空白削除
+            function removeHtmlTag(text) {
+                var removedText = text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "");
+                removedText = removedText.replace(/\s+/g, "");
+                return removedText;
+            }
+        </script>
+    </body>
 
 </html>
