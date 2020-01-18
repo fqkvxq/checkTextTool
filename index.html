@@ -201,7 +201,17 @@
             </div>
         </div>
     </div>
+
     <script>
+        //音声認識
+        SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.onresult = (event) => {
+            alert(event.results[0][0].transcript);
+        }
+        recognition.start();
+
         window.addEventListener(
             "beforeunload",
             function(e) {
