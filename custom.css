@@ -51,7 +51,7 @@ html {
 
 #showPrevTextArea {
     width: 100%;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .display textarea {
@@ -61,7 +61,7 @@ html {
 
 #showNextTextArea {
     width: 100%;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .showtext {

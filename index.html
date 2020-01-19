@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>文章確認ツール</title>
+    <title>1文ずつ確認して校正するツール.js</title>
     <!-- reset -->
     <link　rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
@@ -32,7 +32,7 @@
     <script src="https://rawcdn.githack.com/kimmobrunfeldt/progressbar.js/e0e1a8a67f83934d131dedca270fcc3b0e55d0c6/dist/progressbar.js"></script>
     <!-- clipboard.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
-    <title>文章確認ツール</title>
+    <title>1文ずつ確認して校正するツール.js</title>
   </head>
 
   <body>
@@ -40,7 +40,7 @@
     <div class="container-fluid navigation">
       <div class="row">
         <div class="col-12">
-          <h1 class="text-center">文章確認ツール.js</h1>
+          <h1 class="text-center">1文ずつ確認して校正するツール.js</h1>
         </div>
       </div>
     </div>
@@ -176,7 +176,7 @@
           data-clipboard-target="#editedTextArea"
           onclick="toast()"
         >
-          <p class="text-center">クリップボードにコピー(まだ未実装)</p>
+          <p class="text-center">クリップボードにコピー</p>
         </div>
       </div>
     </div>
@@ -185,11 +185,9 @@
     <div class="container mt-3">
       <div class="row">
         <div class="col-12">
-          <h2 class="text-center">このツールの目的</h2>
+          <h2 class="text-center">このツールの用途</h2>
           <ul>
-            <li>
-              きれいな文章に構成するために1文ずつしっかりと確認するため。
-            </li>
+            <li>きれいな文章を作るために、完成された文章を1文ずつ集中して確認、校正できます。</li>
             <li></li>
             <li></li>
           </ul>
@@ -203,12 +201,14 @@
         <div class="col-12">
           <h2 class="text-center">仕様</h2>
           <ul>
+            <li>Chromeでのみ動作確認済みです。(Safari未対応です)</li>
+            <li>
             <li>元のテキストを入力したら、まずタグ、改行を除去します。</li>
             <li>
               改行と句点(「。」「！」「？」)の部分で文章を分割し、配列に1つづつ格納します。
             </li>
-            <li>配列の中身のテキストを1つずつ表示部分に表示させる。</li>
-            <li>「戻る」「次へ」ボタンで表示させる文章を前後に変更する。</li>
+            <li>配列の中身のテキストを1つずつ表示部分に表示させます。</li>
+            <li>「戻る」「次へ」ボタンで表示させる文章を前後に変更できます。</li>
             <li>上下のtextareaは連動する</li>
           </ul>
         </div>
