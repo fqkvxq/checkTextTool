@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- meta -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>1文ずつ確認して校正するツール.js</title>
     <!-- reset -->
-    <link　rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
+    <link　rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
     <!-- bootstrap -->
     <link rel="stylesheet" href="./bootstrap-grid.min.css" />
     <link rel="stylesheet" href="./bootstrap.min.css" />
@@ -24,45 +24,36 @@
     <!-- custom -->
     <link rel="stylesheet" href="./custom.css" />
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=M+PLUS+1p"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet" />
     <!-- progressbar -->
     <script src="https://rawcdn.githack.com/kimmobrunfeldt/progressbar.js/e0e1a8a67f83934d131dedca270fcc3b0e55d0c6/dist/progressbar.js"></script>
     <!-- clipboard.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
     <title>1文ずつ確認して校正するツール.js</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- nav -->
     <div class="container-fluid navigation">
-      <div class="row">
-        <div class="col-12">
-          <h1 class="text-center">1文ずつ確認して校正するツール.js</h1>
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">1文ずつ確認して校正するツール.js</h1>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- 元テキスト入力部分 -->
     <div class="container original-text">
-      <div class="row">
-        <div class="col-12 heading">
-          <h2 class="text-center">
-            ステップ①：下記にチェックしたいテキストをコピペしてください。
-          </h2>
+        <div class="row">
+            <div class="col-12 heading">
+                <h2 class="text-center">
+                    ステップ①：下記にチェックしたいテキストをコピペしてください。
+                </h2>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12 inputarea">
-          <textarea
-            name=""
-            id="inputArea"
-            cols="30"
-            rows="3"
-            onclick="this.select()"
-          >
+        <div class="row">
+            <div class="col-12 inputarea">
+                <textarea name="" id="inputArea" cols="30" rows="3" onclick="this.select()">
 この中に、チェックしたい文章を入力してください。</textarea
           >
         </div>
@@ -181,6 +172,24 @@
       </div>
     </div>
 
+    <!-- 差分検知機能ここから -->
+    <div class="container diff">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="text-center">差分</h2>
+        </div>
+      </div>
+      <div class="row">
+        <!-- 元の文章 -->
+        <div class="col-4 diff-original">original</div>
+        <!-- 変更した文章 -->
+        <div class="col-4 diff-changed">changed</div>
+        <!-- 差分 -->
+        <div class="col-4 diff-diff">diff</div>
+      </div>
+    </div>
+    <!-- 差分検知機能ここまで -->
+
     <!-- 仕様説明 -->
     <div class="container mt-3">
       <div class="row">
@@ -215,188 +224,6 @@
       </div>
     </div>
 
-    <script>
-      new ClipboardJS(".clipboardButton");
-      window.addEventListener(
-        "beforeunload",
-        function(e) {
-          e.returnValue = "離脱しますか？";
-        },
-        false
-      );
-      var currentArrayNumber = 0; // 現在選択している配列番号(初期は0)
-      var splitedText = ""; // 配列
-      var maxArrayCount = 1; // 配列数(初期は1)
-      var currentPercent = 0;
-      var bar = "";
-      progressBar(currentPercent);
-
-      function toast() {
-        iziToast.show({
-          title: "コピー完了",
-          message: "クリップボードにコピーしました！",
-          color: 'green',
-          position: 'topRight',
-          timeout: 3000,
-        });
-      }
-
-      function progressBar(currentPercent) {
-        // progressbar.js@1.0.0 version is used
-        // Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
-
-        bar = new ProgressBar.Line(showProgressBar, {
-          strokeWidth: 4,
-          easing: "easeInOut",
-          duration: 1400,
-          color: "#FFEA82",
-          trailColor: "#eee",
-          trailWidth: 1,
-          svgStyle: {
-            width: "100%",
-            height: "100%"
-          },
-          text: {
-            style: {
-              // Text color.
-              // Default: same as stroke color (options.color)
-              color: "#999",
-              position: "absolute",
-              right: "0",
-              top: "30px",
-              padding: 0,
-              margin: 0,
-              transform: null
-            },
-            autoStyleContainer: false
-          },
-          from: {
-            color: "#FFEA82"
-          },
-          to: {
-            color: "#ED6A5A"
-          },
-          step: (state, bar) => {
-            bar.setText(Math.round(bar.value() * 100) + " %");
-          }
-        });
-        bar.animate(currentPercent); // Number from 0.0 to 1.0
-      }
-
-      // 編集
-      function startEdit() {
-        // OKの処理を記載
-        var inputText = getInputArea();
-        var removedTagText = removeHtmlTag(inputText);
-        // 文字を分割する
-        splitedText = removedTagText.split(/(?<=。|？|！)/g);
-        console.log(splitedText[0]);
-        showArrayText(splitedText);
-        // 進捗率を計算
-        currentPercent = currentArrayNumber / maxArrayCount;
-        bar.animate(currentPercent);
-        // 進捗率を計算
-        console.log("currentArrayNumber=" + currentArrayNumber);
-        console.log("maxArrayCount=" + maxArrayCount);
-        console.log("現時点の進捗=" + currentPercent);
-      }
-
-      // 編集終了時の処理
-      function endEdit() {
-        // 配列の中身を結合する
-        var editedText = splitedText.join("");
-        console.log(editedText);
-        // テキストエリアに表示する
-        document.getElementById("editedTextArea").value = editedText;
-      }
-
-      //配列をテキストエリアに表示(ボタンを押したとき)
-      function showArrayText(splitedText) {
-        // 表示中の配列番号を取得(初期値0)
-        currentArrayNumber = 0;
-        document.getElementById("showPrevTextArea").value = "";
-        document.getElementById("showTextArea").value =
-          splitedText[currentArrayNumber];
-        document.getElementById("showNextTextArea").value =
-          splitedText[currentArrayNumber + 1];
-        // 配列の要素数を取得
-        maxArrayCount = splitedText.length;
-        endEdit();
-      }
-
-      // 文字の編集を行う
-      function editText(splitedText) {
-        splitedText[currentArrayNumber] = document.getElementById(
-          "showTextArea"
-        ).value;
-        document.getElementById("showTextArea").value =
-          splitedText[currentArrayNumber];
-        endEdit();
-      }
-
-      // 次へを押したときの処理
-      function goNextSentence(splitedText) {
-        console.log(splitedText);
-        if (currentArrayNumber < maxArrayCount - 1) {
-          currentArrayNumber += 1;
-          // 進捗率を計算
-          document.getElementById("showPrevTextArea").value =
-            splitedText[currentArrayNumber - 1];
-          document.getElementById("showTextArea").value =
-            splitedText[currentArrayNumber];
-          document.getElementById("showNextTextArea").value =
-            splitedText[currentArrayNumber + 1];
-          console.log("currentArrayNumber=" + currentArrayNumber);
-          console.log("maxArrayCount=" + maxArrayCount);
-          currentPercent = currentArrayNumber / maxArrayCount;
-          bar.animate(currentPercent);
-        }
-        console.log("現時点の進捗=" + currentPercent);
-      }
-
-      // 戻るを押したときの処理
-      function goPrevSentence() {
-        console.log(splitedText);
-        if (currentArrayNumber > 0) {
-          currentArrayNumber -= 1;
-          document.getElementById("showPrevTextArea").value =
-            splitedText[currentArrayNumber - 1];
-          document.getElementById("showTextArea").value =
-            splitedText[currentArrayNumber];
-          document.getElementById("showNextTextArea").value =
-            splitedText[currentArrayNumber + 1];
-          // 進捗率を計算
-          currentPercent = currentArrayNumber / maxArrayCount;
-          bar.animate(currentPercent);
-        }
-      }
-
-      // 編集確認
-      function editCheck(text) {
-        if (confirm(text)) {
-          startEdit();
-        }
-      }
-
-      // 作成完了確認
-      function syuturyokuCheck(text) {
-        if (confirm(text)) {
-          endEdit();
-        }
-      }
-
-      // 入力のテキストを取得
-      function getInputArea() {
-        const getText = document.getElementById("inputArea").value;
-        return getText;
-      }
-
-      // タグ、空白削除
-      function removeHtmlTag(text) {
-        var removedText = text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, "");
-        removedText = removedText.replace(/\s+/g, "");
-        return removedText;
-      }
-    </script>
+    <script src="./custom.js"></script>
   </body>
 </html>
