@@ -1,52 +1,58 @@
 * {
-  font-family: "M PLUS 1p";
+    font-family: "M PLUS 1p";
 }
 
 html {
-  background-color: #f6f6f4;
+    background-color: #f6f6f4;
 }
+
 
 /* navbar */
 
 .navigation {
-  background-color: #171815;
-  color: #fff;
-  height: 50px;
-}
-.navigation h1 {
-  line-height: 50px;
-  font-size: 20px;
+    background-color: #171815;
+    color: #fff;
+    height: 50px;
 }
 
-/* 元テキスト入力部分 */
-.original-text .heading {
-  background-color: #171815;
-  color: #fff;
-  margin-top: 30px;
-  height: 30px;
+.navigation h1 {
+    line-height: 50px;
+    font-size: 20px;
 }
+
+
+/* 元テキスト入力部分 */
+
+.original-text .heading {
+    background-color: #171815;
+    color: #fff;
+    margin-top: 30px;
+    height: 30px;
+}
+
 .original-text .heading h2 {
-  line-height: 30px;
-  font-size: 17px;
+    line-height: 30px;
+    font-size: 17px;
 }
 
 .original-text .inputarea {
-  border: 1px solid #171815;
-  border-radius: 5px;
+    border: 1px solid #171815;
+    border-radius: 5px;
 }
 
 .original-text textarea {
-  width: 100%;
-  font-size: 20px;
-  margin-top: 30px;
+    width: 100%;
+    font-size: 20px;
+    margin-top: 30px;
 }
+
 
 /* テキスト表示部分 */
 
 .display {
-  margin-top: 30px;
-  border: 1px solid #000;
-  border-radius: 5px;
+    margin-top: 30px;
+    border: 1px solid #000;
+    border-radius: 5px;
 }
 
 #showPrevTextArea {
@@ -55,8 +61,8 @@ html {
 }
 
 .display textarea {
-  width: 100%;
-  font-size: 50px;
+    width: 100%;
+    font-size: 50px;
 }
 
 #showNextTextArea {
@@ -65,28 +71,37 @@ html {
 }
 
 .showtext {
-  font-size: 50px;
-  border: 1px solid #000;
-  height: 500px;
-  border-radius: 5px;
+    font-size: 50px;
+    border: 1px solid #000;
+    height: 500px;
+    border-radius: 5px;
 }
+
 
 /* ボタン部分 */
 
 .button-individual {
-  border: 1px solid #fff;
-  background-color: #171815;
-  height: 50px;
-  border-radius: 5px;
-  user-select: none; /* 選択を禁止する */
+    border: 1px solid #fff;
+    background-color: #171815;
+    height: 50px;
+    border-radius: 5px;
+    user-select: none;
+    /* 選択を禁止する */
 }
 
 .button-individual:hover {
-  opacity: 0.7;
+    opacity: 0.7;
 }
 
 .button p {
-  font-size: 30px;
-  color: #ffffff;
-  line-height: 50px;
+    font-size: 30px;
+    color: #ffffff;
+    line-height: 50px;
+}
+
+.diff-original,
+.diff-changed,
+.diff-diff {
+    height: 300px;
+    border: 1px solid #000;
 }
