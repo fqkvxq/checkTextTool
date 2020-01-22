@@ -57,17 +57,17 @@ html {
 
 #showPrevTextArea {
     width: 100%;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .display textarea {
     width: 100%;
-    font-size: 50px;
+    font-size: 30px;
 }
 
 #showNextTextArea {
     width: 100%;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .showtext {
