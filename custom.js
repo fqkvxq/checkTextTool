@@ -71,7 +71,7 @@ function startEdit() {
   var inputText = getInputArea();
   var removedTagText = removeHtmlTag(inputText);
   // 文字を分割する
-  splitedText = removedTagText.split(/(?<=。|？|！)/g);
+  splitedText = removedTagText.split(/(?<=。|？|！|、|<\/h[1-6]>)/g);
   console.log(splitedText[0]);
   showArrayText(splitedText);
   // 進捗率を計算
