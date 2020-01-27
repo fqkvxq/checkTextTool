@@ -175,7 +175,8 @@ function getInputArea() {
 
 // タグ、空白削除
 function removeHtmlTag(text) {
-    var removedText = removeTag(text, ["h1", "h2", "h3", "h4", "h5", "h6"]; removedText = removedText.replace(/\s+/g, "");
+    var removedText = removeTag(text, ["h1", "h2", "h3", "h4", "h5", "h6"]);
+    removedText = removedText.replace(/\s+/g, "");
         return removedText;
     }
 
