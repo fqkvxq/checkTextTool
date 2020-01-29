@@ -1,7 +1,7 @@
 new ClipboardJS(".clipboardButton");
 window.addEventListener(
     "beforeunload",
-    function(e) {
+    function (e) {
         e.returnValue = "離脱しますか？";
     },
     false
@@ -112,7 +112,7 @@ function endEdit() {
     document.getElementById("changedText").textContent = editedText;
     document.getElementById("change").textContent = editedText;
     var originalText = document.getElementById('originalText').textContent;
-    document.getElementById("copyTextArea").value = "修正前："+originalText+"\n\n"+"修正後："+editedText;
+    document.getElementById("copyTextArea").value = "修正前：" + originalText + "\n\n" + "修正後：" + editedText;
 }
 
 //配列をテキストエリアに表示(ボタンを押したとき)
@@ -208,8 +208,8 @@ function removeTag(str, arrowTag) {
     // 配列形式の場合は'|'で結合
     if (
         Array.isArray ?
-        Array.isArray(arrowTag) :
-        Object.prototype.toString.call(arrowTag) === "[object Array]"
+            Array.isArray(arrowTag) :
+            Object.prototype.toString.call(arrowTag) === "[object Array]"
     ) {
         arrowTag = arrowTag.join("|");
     }
@@ -232,4 +232,26 @@ function syuuseiHanei() {
     var editedText = document.getElementById("editedTextArea").value;
     document.getElementById("inputArea").value = editedText;
     haneiEdit();
+}
+
+// html2canvas
+function showImg() {
+    var element = document.getElementById('showDiffPhp');
+    var scrollAmount = window.pageYOffset;
+    console.log(scrollAmount);
+    html2canvas(element, {
+        onrendered: function (canvas) {
+            var imageURL = canvas.toDataURL();
+            console.log(imageURL);
+            var img = document.getElementById('createdImg');
+            var aLink = document.getElementById('imgLink');
+            img.src = imageURL;
+            aLink.href = imageURL;
+            // 保存
+            aLink.href = imageURL;
+            aLink.setAttribute('download', name || "diffImage");
+            aLink.dispatchEvent(new CustomEvent('click'));
+            window.scrollTo(0,scrollAmount);
+        },
+    });
 }

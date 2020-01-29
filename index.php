@@ -23,6 +23,10 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
   <link rel="stylesheet" href="./bootstrap-grid.min.css" />
   <link rel="stylesheet" href="./bootstrap.min.css" />
   <link rel="stylesheet" href="./bootstrap-reboot.min.css" />
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
   <!-- toast -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
@@ -182,8 +186,8 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
   <!-- PHP差分機能ここから -->
   <div class="container diffCheckPhp">
     <div class="row">
-      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="source" cols="50" rows="7"></textarea></div>
-      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="change" cols="50" rows="7"></textarea></div>
+      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="source" cols="50" rows="5"></textarea></div>
+      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="change" cols="50" rows="5"></textarea></div>
     </div>
     <!-- 差分表示のボタン -->
     <div class="row">
@@ -195,6 +199,16 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
     <div id="showDiffPhp" class="row row-eq-height">
       <div id="out_source" class="col-md-6 px-0"></div>
       <div id="out_change" class="col-md-6 px-0"></div>
+    </div>
+    <div class="row button-individual button" onclick="showImg()">
+      <div class="col-12">
+        <p class="text-white text-center my-0">画像を生成</p>
+      </div>
+    </div>
+    <div class="row createdbutton">
+    <a id="imgLink" href="">
+        <img class="img-fluid" id=createdImg src="" alt="">
+    </a>
     </div>
   </div>
   <!-- PHP差分機能ここまで -->
@@ -233,7 +247,6 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="./custom.js"></script>
   <script src="./textDiff.js"></script>
 </body>
