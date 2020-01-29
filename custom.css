@@ -43,7 +43,6 @@ html {
 .original-text textarea {
     width: 100%;
     font-size: 20px;
-    margin-top: 30px;
 }
 
 
@@ -107,3 +106,13 @@ html {
     border: 1px solid #000;
     overflow: scroll;
 }
+
+/* PHP差分検知部分 */
+.diffCheckPhp textarea {
+    width: 100%;
+}
+.row-eq-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+/* PHP差分検知部分ここまで */

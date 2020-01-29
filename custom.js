@@ -82,6 +82,7 @@ function startEdit() {
     console.log("maxArrayCount=" + maxArrayCount);
     console.log("現時点の進捗=" + currentPercent);
     document.getElementById('originalText').textContent = inputText;
+    document.getElementById('source').textContent = inputText;
 }
 
 function haneiEdit() {
@@ -109,6 +110,7 @@ function endEdit() {
     // テキストエリアに表示する
     document.getElementById("editedTextArea").value = editedText;
     document.getElementById("changedText").textContent = editedText;
+    document.getElementById("change").textContent = editedText;
     var originalText = document.getElementById('originalText').textContent;
     document.getElementById("copyTextArea").value = "修正前："+originalText+"\n\n"+"修正後："+editedText;
 }
