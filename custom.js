@@ -109,6 +109,8 @@ function endEdit() {
     // テキストエリアに表示する
     document.getElementById("editedTextArea").value = editedText;
     document.getElementById("changedText").textContent = editedText;
+    var originalText = document.getElementById('originalText').textContent;
+    document.getElementById("copyTextArea").value = "修正前："+originalText+"\n\n"+"修正後："+editedText;
 }
 
 //配列をテキストエリアに表示(ボタンを押したとき)
