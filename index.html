@@ -163,12 +163,16 @@
     <!-- ボタン部分 -->
     <div class="container button">
       <div class="row">
-        <div
-          class="col-12 button-individual clipboardButton"
+          <div
+          class="col-6 button-individual"
+          onclick="syuuseiHanei()">
+          <p class="text-center">修正を編集に反映</p>
+        </div>
+        <div class="col-6 button-individual clipboardButton"
           data-clipboard-target="#editedTextArea"
           onclick="toast()"
         >
-          <p class="text-center">クリップボードにコピー</p>
+          <p class="text-center">修正を完了してコピー</p>
         </div>
       </div>
     </div>
@@ -177,16 +181,19 @@
     <div class="container diff">
       <div class="row">
         <div class="col-12">
-          <h2 class="text-center">差分(未実装)</h2>
+          <h2 class="text-center">差分</h2>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="diffTexts">
         <!-- 元の文章 -->
-        <div class="col-4 diff-original">original</div>
+        <div class="col-6 diff-original">変更前：<span id="originalText">original</span><br><br></div>
         <!-- 変更した文章 -->
-        <div class="col-4 diff-changed">changed</div>
-        <!-- 差分 -->
-        <div class="col-4 diff-diff">ここに差分を表示(ライターへ直接指示できる形式で)</div>
+        <div class="col-6 diff-changed">変更後：<span id="changedText">original</span></div>
+      </div>
+      <div class="row button-individual button">
+        <div class="col-12">
+          <p class="text-white text-center">差分をコピー(未実装)</p>
+        </div>
       </div>
     </div>
     <!-- 差分検知機能ここまで -->

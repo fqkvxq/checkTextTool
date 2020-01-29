@@ -14,13 +14,15 @@ var bar = "";
 progressBar(currentPercent);
 
 function toast() {
-    iziToast.show({
-        title: "コピー完了",
-        message: "クリップボードにコピーしました！",
-        color: "green",
-        position: "topRight",
-        timeout: 3000
-    });
+    if (confirm("修正を完了してコピーしますか？")) {
+        iziToast.show({
+            title: "コピー完了",
+            message: "クリップボードにコピーしました！",
+            color: "green",
+            position: "topRight",
+            timeout: 3000
+        });
+    }
 }
 
 function progressBar(currentPercent) {
@@ -81,6 +83,24 @@ function startEdit() {
     console.log("currentArrayNumber=" + currentArrayNumber);
     console.log("maxArrayCount=" + maxArrayCount);
     console.log("現時点の進捗=" + currentPercent);
+    document.getElementById('originalText').textContent = inputText;
+}
+
+function haneiEdit() {
+    // OKの処理を記載
+    var inputText = getInputArea();
+    var removedTagText = removeHtmlTag(inputText);
+    // 文字を分割する
+    splitedText = removedTagText.split(/(?<=。|？|！|<\/h[1-6]>)/g);
+    console.log(splitedText[0]);
+    showArrayText(splitedText);
+    // 進捗率を計算
+    currentPercent = currentArrayNumber / maxArrayCount;
+    bar.animate(currentPercent);
+    // 進捗率を計算
+    console.log("currentArrayNumber=" + currentArrayNumber);
+    console.log("maxArrayCount=" + maxArrayCount);
+    console.log("現時点の進捗=" + currentPercent);
 }
 
 // 編集終了時の処理
@@ -90,6 +110,7 @@ function endEdit() {
     console.log(editedText);
     // テキストエリアに表示する
     document.getElementById("editedTextArea").value = editedText;
+    document.getElementById("changedText").textContent = editedText;
 }
 
 //配列をテキストエリアに表示(ボタンを押したとき)
@@ -177,30 +198,36 @@ function getInputArea() {
 function removeHtmlTag(text) {
     var removedText = removeTag(text, ["h1", "h2", "h3", "h4", "h5", "h6"]);
     removedText = removedText.replace(/\s+/g, "");
-        return removedText;
+    return removedText;
+}
+
+// 指定したタグ以外のタグをすべて削除
+function removeTag(str, arrowTag) {
+    // 配列形式の場合は'|'で結合
+    if (
+        Array.isArray ?
+        Array.isArray(arrowTag) :
+        Object.prototype.toString.call(arrowTag) === "[object Array]"
+    ) {
+        arrowTag = arrowTag.join("|");
     }
 
-    // 指定したタグ以外のタグをすべて削除
-    function removeTag(str, arrowTag) {
-        // 配列形式の場合は'|'で結合
-        if (
-            Array.isArray ?
-            Array.isArray(arrowTag) :
-            Object.prototype.toString.call(arrowTag) === "[object Array]"
-        ) {
-            arrowTag = arrowTag.join("|");
-        }
+    // arrowTag が空の場合は全てのHTMLタグを除去する
+    arrowTag = arrowTag ? arrowTag : "";
 
-        // arrowTag が空の場合は全てのHTMLタグを除去する
-        arrowTag = arrowTag ? arrowTag : "";
+    // パターンを動的に生成
+    var pattern = new RegExp(
+        "(?!<\\/?(" +
+        arrowTag +
+        ")(>|\\s[^>]*>))<(\"[^\"]*\"|\\'[^\\']*\\'|[^\\'\">])*>",
+        "gim"
+    );
 
-        // パターンを動的に生成
-        var pattern = new RegExp(
-            "(?!<\\/?(" +
-            arrowTag +
-            ")(>|\\s[^>]*>))<(\"[^\"]*\"|\\'[^\\']*\\'|[^\\'\">])*>",
-            "gim"
-        );
+    return str.replace(pattern, "");
+}
 
-        return str.replace(pattern, "");
-    }
+function syuuseiHanei() {
+    var editedText = document.getElementById("editedTextArea").value;
+    document.getElementById("inputArea").value = editedText;
+    haneiEdit();
+}

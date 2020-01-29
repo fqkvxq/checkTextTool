@@ -91,6 +91,7 @@ html {
 
 .button-individual:hover {
     opacity: 0.7;
+    cursor: hand;
 }
 
 .button p {
