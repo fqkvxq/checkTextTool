@@ -1,3 +1,13 @@
+<?php
+if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
+  include('./textDiff.php');
+  $diff = new TextDiff($_POST['source'], $_POST['change']);
+  $html = $diff->getHtml();
+  $html['data'] = var_export($diff->getData(), true);
+  echo json_encode($html);
+  exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,12 +33,12 @@
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
   <!-- custom -->
   <link rel="stylesheet" href="./custom.css" />
+  <link rel="stylesheet" href="./textDiff.css">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet" />
   <!-- progressbar -->
-  <script
-    src="https://rawcdn.githack.com/kimmobrunfeldt/progressbar.js/e0e1a8a67f83934d131dedca270fcc3b0e55d0c6/dist/progressbar.js"></script>
+  <script src="https://rawcdn.githack.com/kimmobrunfeldt/progressbar.js/e0e1a8a67f83934d131dedca270fcc3b0e55d0c6/dist/progressbar.js"></script>
   <!-- clipboard.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
   <title>1文ずつ確認して校正するツール.js</title>
@@ -54,8 +64,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 inputarea">
-        <textarea name="" id="inputArea" cols="30" rows="3" onclick="this.select()">この中に、チェックしたい文章を入力してください。</textarea>
+      <div class="col-12 px-0 inputarea">
+        <textarea class="form-control" name="" id="inputArea" cols="30" rows="3" onclick="this.select()">この中に、チェックしたい文章を入力してください。</textarea>
       </div>
     </div>
   </div>
@@ -72,9 +82,9 @@
   <!-- 前のテキストを表示 -->
   <div class="container display mt-0">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 px-0">
         <!-- ここにテキストボックスの文章を表示する -->
-        <textarea name="" id="showPrevTextArea" cols="30" rows="3" readonly>前の文が表示されます。(ここでは編集できません。)</textarea>
+        <textarea class="form-control" name="" id="showPrevTextArea" cols="30" rows="3" readonly>前の文が表示されます。(ここでは編集できません。)</textarea>
       </div>
     </div>
   </div>
@@ -82,10 +92,9 @@
   <!-- テキスト表示 -->
   <div class="container display mt-0">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 px-0">
         <!-- ここにテキストボックスの文章を表示する -->
-        <textarea name="" id="showTextArea" cols="30" rows="5"
-          onInput="editText(splitedText)">現在選択されている文章がここに表示されます。ここで文章を編集してください。</textarea>
+        <textarea class="form-control" name="" id="showTextArea" cols="30" rows="5" onInput="editText(splitedText)">現在選択されている文章がここに表示されます。ここで文章を編集してください。</textarea>
       </div>
     </div>
   </div>
@@ -105,9 +114,9 @@
   <!-- 次のテキストを表示 -->
   <div class="container display mt-0">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 px-0">
         <!-- ここにテキストボックスの文章を表示する -->
-        <textarea name="" id="showNextTextArea" cols="30" rows="3" readonly>次の文が表示されます。(ここでは編集できません。)</textarea>
+        <textarea class="form-control" name="" id="showNextTextArea" cols="30" rows="3" readonly>次の文が表示されます。(ここでは編集できません。)</textarea>
       </div>
     </div>
   </div>
@@ -129,8 +138,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 inputarea">
-        <textarea name="" id="editedTextArea" cols="30" rows="5" readonly>ここに完成されたテキストが表示されます。(ここでは編集できません。)</textarea>
+      <div class="col-12 px-0 inputarea">
+        <textarea class="form-control" name="" id="editedTextArea" cols="30" rows="5" readonly>ここに完成されたテキストが表示されます。(ここでは編集できません。)</textarea>
       </div>
     </div>
   </div>
@@ -159,7 +168,7 @@
         変更後：<span id="changedText">original</span>
       </div>
       <!-- コピー用textarea -->
-      <textarea style="height:1px;padding:0;border:none;outline:none" name="" id="copyTextArea" cols="30" rows="10" readonly></textarea>
+      <textarea class="form-control" style="height:1px;padding:0;border:none;outline:none" name="" id="copyTextArea" cols="30" rows="10" readonly></textarea>
     </div>
     <!-- コピーボタン -->
     <div class="row button-individual button clipboardButton" data-clipboard-target="#copyTextArea" onclick="toast()">
@@ -169,6 +178,26 @@
     </div>
   </div>
   <!-- 差分検知機能ここまで -->
+
+  <!-- PHP差分機能ここから -->
+  <div class="container diffCheckPhp">
+    <div class="row">
+      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="source" cols="50" rows="7"></textarea></div>
+      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="change" cols="50" rows="7"></textarea></div>
+    </div>
+    <!-- 差分表示のボタン -->
+    <div class="row">
+      <div class="col-md-12 px-0 text-center">
+        <button type="button" id="button" class="btn btn-lg btn-primary btn-block">差分表示！</button>
+      </div>
+    </div>
+    <!-- 差分表示部分 -->
+    <div id="showDiffPhp" class="row row-eq-height">
+      <div id="out_source" class="col-md-6 px-0"></div>
+      <div id="out_change" class="col-md-6 px-0"></div>
+    </div>
+  </div>
+  <!-- PHP差分機能ここまで -->
 
   <!-- 仕様説明 -->
   <div class="container mt-3">
@@ -204,8 +233,9 @@
       </div>
     </div>
   </div>
-
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="./custom.js"></script>
+  <script src="./textDiff.js"></script>
 </body>
 
 </html>
