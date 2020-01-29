@@ -164,11 +164,11 @@
     <div class="container button">
       <div class="row">
           <div
-          class="col-6 button-individual"
+          class="col-3 button-individual"
           onclick="syuuseiHanei()">
           <p class="text-center">修正を編集に反映</p>
         </div>
-        <div class="col-6 button-individual clipboardButton"
+        <div class="col-9 button-individual clipboardButton"
           data-clipboard-target="#editedTextArea"
           onclick="toast()"
         >
@@ -190,7 +190,11 @@
         <!-- 変更した文章 -->
         <div class="col-6 diff-changed">変更後：<span id="changedText">original</span></div>
       </div>
-      <div class="row button-individual button">
+      <div
+      class="row button-individual button clipboardButton"
+      data-clipboard-target="#diffTexts"
+      onclick=""
+      >
         <div class="col-12">
           <p class="text-white text-center">差分をコピー(未実装)</p>
         </div>
