@@ -1,6 +1,6 @@
 <?php
 if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
-  include(dirname(__FILE__) . '/textDiff.php');
+  include(dirname(__FILE__) . './textDiff.php');
   $diff = new TextDiff($_POST['source'], $_POST['change']);
   $html = $diff->getHtml();
   $html['data'] = var_export($diff->getData(), true);
