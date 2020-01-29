@@ -14,15 +14,13 @@ var bar = "";
 progressBar(currentPercent);
 
 function toast() {
-    if (confirm("修正を完了してコピーしますか？")) {
-        iziToast.show({
-            title: "コピー完了",
-            message: "クリップボードにコピーしました！",
-            color: "green",
-            position: "topRight",
-            timeout: 3000
-        });
-    }
+    iziToast.show({
+        title: "コピー完了",
+        message: "クリップボードにコピーしました！",
+        color: "green",
+        position: "topRight",
+        timeout: 3000
+    });
 }
 
 function progressBar(currentPercent) {
