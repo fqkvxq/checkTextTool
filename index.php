@@ -161,26 +161,28 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
   </div>
 
   <!-- 差分検知機能ここから -->
-  <div class="container">
-    <div class="row" id="diffTexts">
-      <!-- 元の文章 -->
-      <div class="col-6 diff-original">
-        変更前：<span id="originalText">original</span><br /><br />
-      </div>
-      <!-- 変更した文章 -->
-      <div class="col-6 diff-changed">
-        変更後：<span id="changedText">original</span>
-      </div>
-      <!-- コピー用textarea -->
-      <textarea class="form-control" style="height:1px;padding:0;border:none;outline:none" name="" id="copyTextArea" cols="30" rows="10" readonly></textarea>
-    </div>
-    <!-- コピーボタン -->
-    <div class="row button-individual button clipboardButton" data-clipboard-target="#copyTextArea" onclick="toast()">
-      <div class="col-12">
-        <p class="text-white text-center">差分をコピー(未実装)</p>
-      </div>
-    </div>
-  </div>
+  <?php
+  // <div class="container">
+  //   <div class="row" id="diffTexts">
+  //     <!-- 元の文章 -->
+  //     <div class="col-6 diff-original">
+  //       変更前：<span id="originalText">original</span><br /><br />
+  //     </div>
+  //     <!-- 変更した文章 -->
+  //     <div class="col-6 diff-changed">
+  //       変更後：<span id="changedText">original</span>
+  //     </div>
+  //     <!-- コピー用textarea -->
+  //     <textarea class="form-control" style="height:1px;padding:0;border:none;outline:none" name="" id="copyTextArea" cols="30" rows="10" readonly></textarea>
+  //   </div>
+  //   <!-- コピーボタン -->
+  //   <div class="row button-individual button clipboardButton" data-clipboard-target="#copyTextArea" onclick="toast()">
+  //     <div class="col-12">
+  //       <p class="text-white text-center">差分をコピー(未実装)</p>
+  //     </div>
+  //   </div>
+  // </div>
+  ?>
   <!-- 差分検知機能ここまで -->
 
   <!-- PHP差分機能ここから -->
