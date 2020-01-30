@@ -82,7 +82,7 @@ function startEdit() {
     console.log("maxArrayCount=" + maxArrayCount);
     console.log("現時点の進捗=" + currentPercent);
     document.getElementById('originalText').textContent = inputText;
-    document.getElementById('source').textContent = inputText;
+    document.getElementById('source').textContent = removeHtmlTag(inputText);
 }
 
 function haneiEdit() {
