@@ -186,8 +186,8 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
   <!-- PHP差分機能ここから -->
   <div class="container diffCheckPhp">
     <div class="row">
-      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="source" cols="50" rows="5"></textarea></div>
-      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="change" cols="50" rows="5"></textarea></div>
+      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="source" cols="50" rows="5" readonly></textarea></div>
+      <div class="col-md-6 px-0"><textarea class="form-control" name="" id="change" cols="50" rows="5" readonly></textarea></div>
     </div>
     <!-- 差分表示のボタン -->
     <div class="row">
