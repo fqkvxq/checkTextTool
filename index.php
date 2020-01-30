@@ -198,7 +198,7 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
       </div>
     </div>
     <!-- 差分表示部分 -->
-    <div id="showDiffPhp" class="row row-eq-height">
+    <div id="showDiffPhp" class="row my-3 row-eq-height">
       <div id="out_source" class="col-md-6 px-0"></div>
       <div id="out_change" class="col-md-6 px-0"></div>
     </div>
