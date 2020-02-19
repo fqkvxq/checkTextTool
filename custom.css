@@ -116,3 +116,14 @@ html {
     flex-wrap: wrap;
 }
 /* PHP差分検知部分ここまで */
+
+/* 文字数カウント */
+.mojisuuCount {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 10;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}

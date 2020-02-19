@@ -1,7 +1,7 @@
 new ClipboardJS(".clipboardButton");
 window.addEventListener(
     "beforeunload",
-    function(e) {
+    function (e) {
         e.returnValue = "離脱しますか？";
     },
     false
@@ -83,6 +83,7 @@ function startEdit() {
     console.log("現時点の進捗=" + currentPercent);
     document.getElementById('originalText').textContent = inputText;
     document.getElementById('source').textContent = inputText;
+    getCurrentMojisuu();
 }
 
 function haneiEdit() {
@@ -100,6 +101,7 @@ function haneiEdit() {
     console.log("currentArrayNumber=" + currentArrayNumber);
     console.log("maxArrayCount=" + maxArrayCount);
     console.log("現時点の進捗=" + currentPercent);
+    getCurrentMojisuu();
 }
 
 // 編集終了時の処理
@@ -112,7 +114,7 @@ function endEdit() {
     document.getElementById("changedText").textContent = editedText;
     document.getElementById("change").textContent = editedText;
     var originalText = document.getElementById('originalText').textContent;
-    document.getElementById("copyTextArea").value = "修正前："+originalText+"\n\n"+"修正後："+editedText;
+    document.getElementById("copyTextArea").value = "修正前：" + originalText + "\n\n" + "修正後：" + editedText;
 }
 
 //配列をテキストエリアに表示(ボタンを押したとき)
@@ -131,11 +133,9 @@ function showArrayText(splitedText) {
 
 // 文字の編集を行う
 function editText(splitedText) {
-    splitedText[currentArrayNumber] = document.getElementById(
-        "showTextArea"
-    ).value;
-    document.getElementById("showTextArea").value =
-        splitedText[currentArrayNumber];
+    splitedText[currentArrayNumber] = document.getElementById("showTextArea").value;
+    document.getElementById("showTextArea").value = splitedText[currentArrayNumber];
+    getCurrentMojisuu();
     endEdit();
 }
 
@@ -157,6 +157,12 @@ function goNextSentence(splitedText) {
         bar.animate(currentPercent);
     }
     console.log("現時点の進捗=" + currentPercent);
+    getCurrentMojisuu();
+    
+}
+
+function getCurrentMojisuu(){
+    document.getElementById("currentMojisuu").textContent = splitedText[currentArrayNumber].length;
 }
 
 // 戻るを押したときの処理
@@ -174,6 +180,7 @@ function goPrevSentence() {
         currentPercent = currentArrayNumber / maxArrayCount;
         bar.animate(currentPercent);
     }
+    getCurrentMojisuu();
 }
 
 // 編集確認
@@ -208,8 +215,8 @@ function removeTag(str, arrowTag) {
     // 配列形式の場合は'|'で結合
     if (
         Array.isArray ?
-        Array.isArray(arrowTag) :
-        Object.prototype.toString.call(arrowTag) === "[object Array]"
+            Array.isArray(arrowTag) :
+            Object.prototype.toString.call(arrowTag) === "[object Array]"
     ) {
         arrowTag = arrowTag.join("|");
     }

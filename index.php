@@ -45,6 +45,13 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
 </head>
 
 <body>
+  <!-- 文字数カウントボックス -->
+  <div class="mojisuuCount">
+    <span>文字数：</span>
+    <span id="currentMojisuu">000</span>
+    <span>文字</span>
+  </div>
+
   <!-- nav -->
   <div class="container-fluid navigation">
     <div class="row">
