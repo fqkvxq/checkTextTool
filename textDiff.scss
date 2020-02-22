@@ -1,0 +1,68 @@
+.differ {
+    width: 100%;
+    margin: 0;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    font-size: inherit;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+  
+    td {
+      padding: 1px 4px;
+      font-size: inherit;
+      border-top: 1px dotted #eee;
+      border-left: 1px solid #ddd;
+    }
+  
+    .-line {
+      &:first-child td {
+        border-top: 0;
+      }
+  
+      td:first-child {
+        border-left: 0;
+      }
+    }
+  
+    .-number {
+      width: 5%;
+      padding-top: .4em;
+      white-space: nowrap;
+      text-align: right;
+      vertical-align: top;
+      font-size: 80%;
+      font-family: Arial;
+      border-top: 1px solid #e6e6e6;
+      color: #999;
+    }
+  
+    .-text {
+      padding-left: 8px;
+      border-left: 3px double #ddd;
+      background: #fff;
+    }
+  
+    .-is-differ .-text {
+      background: #FFFBE6;
+    }
+  
+    .-no-differ .-text {
+      color: #777;
+    }
+  
+    .-word {
+      display: inline-block;
+      vertical-align: middle;
+  
+      /*font-weight:bold;*/
+      &.-source {
+        color: red;
+        background: #dfd;
+      }
+      &.-change {
+        color: green;
+        background: #fdd;
+      }
+    }
+}
