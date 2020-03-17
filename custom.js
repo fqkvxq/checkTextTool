@@ -83,6 +83,8 @@ function startEdit() {
     console.log("現時点の進捗=" + currentPercent);
     document.getElementById('originalText').textContent = inputText;
     document.getElementById('source').textContent = inputText;
+    document.getElementById('currentParagraph').textContent = currentArrayNumber+1;
+    document.getElementById('allOfParagraph').textContent = maxArrayCount;
     getCurrentMojisuu();
 }
 
@@ -151,6 +153,8 @@ function goNextSentence(splitedText) {
             splitedText[currentArrayNumber];
         document.getElementById("showNextTextArea").value =
             splitedText[currentArrayNumber + 1];
+        document.getElementById('currentParagraph').textContent = currentArrayNumber+1;
+        document.getElementById('allOfParagraph').textContent = maxArrayCount;
         console.log("currentArrayNumber=" + currentArrayNumber);
         console.log("maxArrayCount=" + maxArrayCount);
         currentPercent = currentArrayNumber / maxArrayCount;
@@ -176,6 +180,8 @@ function goPrevSentence() {
             splitedText[currentArrayNumber];
         document.getElementById("showNextTextArea").value =
             splitedText[currentArrayNumber + 1];
+        document.getElementById('currentParagraph').textContent = currentArrayNumber+1;
+        document.getElementById('allOfParagraph').textContent = maxArrayCount;
         // 進捗率を計算
         currentPercent = currentArrayNumber / maxArrayCount;
         bar.animate(currentPercent);
