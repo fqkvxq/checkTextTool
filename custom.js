@@ -108,7 +108,16 @@ function haneiEdit() {
 function endEdit() {
     // 配列の中身を結合する
     var editedText = splitedText.join("");
-    console.log(editedText);
+
+    //h開始タグ前を改行
+    editedText = editedText.replace(/<h/g,'\r\n\n<h');
+    editedText = editedText.replace(/\/h2>/g,'h2>\r\n');
+    editedText = editedText.replace(/\/h3>/g,'h3>\r\n');
+    editedText = editedText.replace(/\/h4>/g,'h4>\r\n');
+    editedText = editedText.replace(/\/h5>/g,'h5>\r\n');
+    editedText = editedText.replace(/\/h6>/g,'h6>\r\n');
+    console.dir(editedText);
+    
     // テキストエリアに表示する
     document.getElementById("editedTextArea").value = editedText;
     document.getElementById("changedText").textContent = editedText;
