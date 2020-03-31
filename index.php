@@ -49,7 +49,12 @@ if (array_key_exists('source', $_POST) && array_key_exists('change', $_POST)) {
   <div class="mojisuuCount">
     <span>文字数：</span>
     <span id="currentMojisuu">000</span>
-    <span>文字</span>
+    <span>文字、</span>
+    <span>現在の文章：</span>
+    <span id="currentParagraph">000</span>
+    <span>文/</span>
+    <span id="allOfParagraph">000</span>
+    <span>文</span>
   </div>
 
   <!-- nav -->
